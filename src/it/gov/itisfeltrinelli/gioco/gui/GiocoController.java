@@ -36,7 +36,7 @@ public class GiocoController {
 //	}//
 	
 	
-	private GiocoModel gM = new GiocoModel();
+	private GiocoModel model = new GiocoModel();
 	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -68,10 +68,10 @@ public class GiocoController {
     		numero = Integer.parseInt(txtNumero.getText().replaceAll("\\D+", ""));
     		
     		int ris;
-    		ris = gM.controlla(numero);
+    		ris = model.controlla(numero);
     		
     		//numero fuori range
-    		if(ris == -2)		txtStatus.setText("Il numero inserito è fuori range. Inserisci numeri compresi tra 1 e " + gM.getMAXNUMERO());
+    		if(ris == -2)		txtStatus.setText("Il numero inserito è fuori range. Inserisci numeri compresi tra 1 e " + model.getMAXNUMERO());
     		
     		//num troppo piccolo, ma nel range
     		else if(ris == 1)	txtStatus.setText("Il numero da indovinare è maggiore del numero inserito");
@@ -93,7 +93,7 @@ public class GiocoController {
     		txtStatus.setText("Inserisci solo numeri grazie!");
     	}
     	
-    	txtTentativi.setText(gM.getTentativi());
+    	txtTentativi.setText(model.getTentativi());
     	txtNumero.setText("");
     	
     }
@@ -103,8 +103,8 @@ public class GiocoController {
     	btnIndovina.setDisable(false);
     	btnStart.setDisable(true);
     	btnIndovina.setDefaultButton(true);
-    	gM.startGame();
-    	txtTentativi.setText(gM.getTentativi());
+    	model.startGame();
+    	txtTentativi.setText(model.getTentativi());
     	txtStatus.setText("");
     	txtNumero.setText("");
     }
@@ -120,4 +120,8 @@ public class GiocoController {
         btnStart.setDefaultButton(true);	//serve per impostare il tasto come predefinito in modo tale da poter essere cliccato anche con "INVIO", ma funziona solo se c'è un solo tasto di default
         btnIndovina.setDisable(true);
     }
+
+	public void setModel(GiocoModel model) {
+		this.model= model;
+	}
 }
